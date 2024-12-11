@@ -22,6 +22,7 @@ router.post('/', async( req: Request, res:Response ) => {
   try {
     const city = req.body.cityName;
     const weatherData = await WeatherService.getWeatherForCity(city);
+    HistoryService.addCity(city);
     res.json(weatherData);
 
   } catch(error){
@@ -32,7 +33,8 @@ router.post('/', async( req: Request, res:Response ) => {
 
 // TODO: GET search history
 router.get('/history', async (req, res) => {
-  
+  const cities = await HistoryService.getCities();
+  res.json(cities);
 });
 
 // * BONUS TODO: DELETE city from search history
