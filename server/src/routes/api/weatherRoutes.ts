@@ -11,12 +11,6 @@ router.get('/', async(req, res) => {
   res.json( weatherData );
 })
 
-router.get('/test', async(_req: Request, res:Response) => {
-  console.log("you are at test");
-  const data = await HistoryService.test();
-  res.send(data);
-})
-
 router.post('/', async( req: Request, res:Response ) => {
   // TODO: GET weather data from city name // TODO: save city to search history
   try {

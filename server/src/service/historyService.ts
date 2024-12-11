@@ -1,7 +1,4 @@
-import { rejects } from 'node:assert';
 import fs from 'node:fs';
-import path, { resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
 
 // TODO: Define a City class with name and id properties
 // TODO: Complete the HistoryService class
@@ -33,42 +30,12 @@ class HistoryService {
     );
   }
 
-  /*
-  const data = cities.map( ( { name, id } : City ) => {
-      return { 
-        id,
-        name,
-      }
-    })
-  */
   // TODO: Define a getCities method that reads the cities from the searchHistory.json file and returns them as an array of City objects
   async getCities() {
     const jsonData = await this.read();
     return JSON.parse(jsonData);
   }
 
-  async test() {
-
-    this.write([{
-      name:"new york",
-      id: "1"
-    },{
-      name:"Chicago",
-      id: "2"
-    },{
-      name:"Los Angeles",
-      id: "3"
-    }])
-
-    //const arr : any[] = [{
-     // name:"new york",
-      //id: "1"
-    //}];
-    const jsonData = await this.read();
-
-    //console.log(typeof JSON.parse(jsonData));    
-
-  }
   // TODO Define an addCity method that adds a city to the searchHistory.json file
   async addCity(city: string) {
      const jsonData = await this.read();
