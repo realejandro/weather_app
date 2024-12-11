@@ -3,8 +3,6 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 // TODO: Define an interface for the Coordinates object
-
-
 interface Coordinates {
   lat: number;
   lon:number;
@@ -30,7 +28,7 @@ class WeatherService {
   private city: string;
   private url:string;
 
-  constructor(){
+  constructor() {
     this.city = '';
     this.API_KEY = process.env.API_KEY || '';
     this.url = process.env.API_BASE_URL|| '';
@@ -70,7 +68,7 @@ class WeatherService {
   // TODO: Create buildWeatherQuery method 
   private buildWeatherQuery(coordinates: Coordinates): string {
     const { lat, lon } = coordinates;
-    return `lat=${lat}&lon=${lon}&cnt=40&appid=${this.API_KEY}&units=metric`;  // Units can be metric or imperial
+    return `lat=${lat}&lon=${lon}&cnt=40&appid=${this.API_KEY}&units=metric`;  
   }
   
 
@@ -82,7 +80,7 @@ class WeatherService {
   }
 
   // TODO: Create fetchWeatherData method
-  async fetchWeatherData(coordinates: Coordinates) {
+  private async fetchWeatherData(coordinates: Coordinates) {
     const weatherQuery = await this.buildWeatherQuery(coordinates);
     const resp = await fetch(`${this.url}/data/2.5/forecast?${weatherQuery}`);
     const { list } = await resp.json();  
@@ -91,7 +89,7 @@ class WeatherService {
     return forecastWeather;
   }
 
-  // TODO: Build parseCurrentWeather method -> // private parseCurrentWeather(response: any) {}
+  // TODO: Build parseCurrentWeather method
   private parseCurrentWeather(response: any) {
 
     const currentWeatherData : Weather = {
