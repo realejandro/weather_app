@@ -41,7 +41,12 @@ class HistoryService {
      const jsonData = await this.read();
      const cities : City[] = JSON.parse(jsonData);
      const newCity: City = { name:city, id: (cities.length+1).toString() }
-     cities.push(newCity);
+     const arrCitiesNames = cities.map( (city) => city.name.toLowerCase() );
+
+     if(!arrCitiesNames.includes( newCity.name.toLowerCase() )){
+      cities.push(newCity);
+     } 
+
      this.write(cities);
   }
   // * BONUS TODO: Define a removeCity method that removes a city from the searchHistory.json file
